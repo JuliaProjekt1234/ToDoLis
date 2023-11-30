@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TablesHttpService } from './services/http-services/tables-http.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ToDoList';
+
+  constructor(private tablesHttpService: TablesHttpService) { }
+
+  public addTable() {
+    this.tablesHttpService.addNewTable();
+  }
 }
