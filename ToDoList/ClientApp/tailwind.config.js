@@ -15,6 +15,7 @@ module.exports = {
           'DEFAULT': '#2980b9',
           'dark': '#1f618d',
         },
+        'bg-primary': '#D2ECEA'
       },
     },
   },

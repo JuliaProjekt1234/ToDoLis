@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { TablesHttpService } from './services/http-services/tables-http.service';
+import { BaseTable } from './models/table.model';
+import { ListComponent } from './components/list/list.component';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +13,7 @@ export class AppComponent {
 
   constructor(private tablesHttpService: TablesHttpService) { }
 
-  public addTable() {
-    this.tablesHttpService.addNewTable();
-  }
+  // public addTable() {
+  //   this.tablesHttpService.addNewTable(new Table(0, "kl", "kodok", "jdje")).subscribe(h => console.log("jjjjj ", h))
+  // }
 }

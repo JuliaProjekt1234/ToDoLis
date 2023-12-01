@@ -1,0 +1,4 @@
+<div class="w-full p-[16px] flex">
+    <color-picker-button class="w-full flex justify-around" *ngFor="let color of colors" [color]="color"
+        [activeColor]="activeColor" (click)="selectColor(color)"></color-picker-button>
+</div>
