@@ -9,12 +9,16 @@ import { AddTableComponent } from './components/add-table/add-table.component';
 import { ColorPickerComponent } from './components/add-table/color-picker/color-picker.component';
 import { ColorPickerButtonComponent } from './components/add-table/color-picker/color-picker-button/color-picker-button.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TablesComponent } from './components/tables/tables.component';
+import { TableComponent } from './components/tables/table/table.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ListComponent,
+    TableComponent,
+    TablesComponent,
     AddTableComponent,
     ColorPickerComponent,
     ColorPickerButtonComponent

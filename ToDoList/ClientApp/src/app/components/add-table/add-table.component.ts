@@ -5,7 +5,7 @@ import { BaseTable } from 'src/app/models/table.model';
 import { TablesHttpService } from 'src/app/services/http-services/tables-http.service';
 
 @Component({
-  selector: 'addTable',
+  selector: 'add-table',
   templateUrl: './add-table.component.html',
   styleUrls: ['./add-table.component.scss']
 })
@@ -33,7 +33,7 @@ export class AddTableComponent {
 
   submit() {
     if (this.addTableForm.invalid) return;
-    this.tableHttpService.addNewTable(this.createFromForm()).subscribe();
+    this.tableHttpService.addNewTable(this.createFromForm()).subscribe(p => console.log("jjkk ", p));
   }
 
   private createFromForm(): BaseTable {

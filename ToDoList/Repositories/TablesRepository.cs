@@ -12,7 +12,7 @@ public class TablesRepository : ITablesRepository
         _dbContext = dbContext;
     }
 
-    public async Task Add(Table table)
+    public async System.Threading.Tasks.Task Add(Table table)
     {
         await _dbContext.AddEntity(table);
     }

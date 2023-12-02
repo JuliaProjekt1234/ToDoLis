@@ -4,6 +4,6 @@ namespace ToDoList.Repositories;
 
 public interface ITablesRepository
 {
-    public Task Add(Table table);
+    public System.Threading.Tasks.Task Add(Table table);
     public Task<List<Table>> GetTables();
 }

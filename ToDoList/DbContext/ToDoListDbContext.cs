@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.Extensions.Options;
+using System.Reflection.Metadata;
 using ToDoList.Models;
 
 namespace ToDoList.Db;
@@ -8,12 +10,25 @@ public class ToDoListDbContext : DbContext, IToDoListDbContext
 {
     public ToDoListDbContext(DbContextOptions<ToDoListDbContext> options) : base(options)
     {
-
     }
 
-    public DbSet<Table> Tables { get; set; }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
 
-    public async Task AddEntity<TEntity>(TEntity entity) where TEntity : class
+        modelBuilder.Entity<Table>()
+            .HasMany(e => e.Tasks)
+            .WithOne(e => e.Table)
+            .HasForeignKey(e => e.TableId)
+            .IsRequired();
+
+        modelBuilder.Entity<Models.Task>()
+           .HasOne(e => e.Table)
+           .WithMany(e => e.Tasks)
+           .IsRequired();
+    }
+    public DbSet<Table> Tables { get; set; }
+    public DbSet<Models.Task> Tasks { get; set; }
+    public async System.Threading.Tasks.Task AddEntity<TEntity>(TEntity entity) where TEntity : class
     {
         Set<TEntity>().Add(entity);
         await SaveChangesAsync();

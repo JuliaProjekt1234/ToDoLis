@@ -1,4 +1,6 @@
-﻿namespace ToDoList.Models;
+﻿using Microsoft.Extensions.Hosting;
+
+namespace ToDoList.Models;
 
 public class Table
 {
@@ -7,6 +9,7 @@ public class Table
     public string Color { get; set; }
     public string Description { get; set; }
 
+    public virtual ICollection<Task> Tasks { get; } = new List<Task>();
     public Table()
     {
 

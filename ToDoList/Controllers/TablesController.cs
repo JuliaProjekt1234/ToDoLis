@@ -8,6 +8,7 @@ namespace ToDoLists.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Produces("application/json")]
     public class TablesController : ControllerBase
     {
         private readonly ILogger<TablesController> _logger;
@@ -26,15 +27,15 @@ namespace ToDoLists.Controllers
         }
 
         [HttpGet(nameof(GetTables))]
-        public Task<List<ToDoList.Models.Table>> GetTables()
+        public async Task<List<TableDto>> GetTables()
         {
-            return _tablesRepository.GetTables();
+            return _mapper.Map<List<TableDto>>((await _tablesRepository.GetTables()));
         }
 
         [HttpPut(nameof(AddTable))]
-        public async Task AddTable([FromBody] TableDto tableDto)
+        public System.Threading.Tasks.Task AddTable([FromBody] BaseTableDto tableDto)
         {
-            await _tablesRepository.Add(_mapper.Map<Table>(tableDto));
+            return _tablesRepository.Add(_mapper.Map<Table>(tableDto));
         }
     }
 }

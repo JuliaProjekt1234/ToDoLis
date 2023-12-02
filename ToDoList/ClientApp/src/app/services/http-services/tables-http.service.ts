@@ -1,8 +1,14 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { BaseTable } from "src/app/models/table.model";
+import { BaseTable, Table } from "src/app/models/table.model";
+const headers = {
+    'Content-Type': 'application/json; charset=UTF-8',
+    'Access-Control-Allow-Origin': '*'
+};
 
+
+const options = { headers: headers };
 @Injectable({ providedIn: 'root' })
 export class TablesHttpService {
     constructor(private httpClinet: HttpClient) {
@@ -10,6 +16,10 @@ export class TablesHttpService {
     }
 
     addNewTable(table: BaseTable): Observable<object> {
-        return this.httpClinet.put('http://localhost:5129/Tables/AddTable', table)
+        return this.httpClinet.put('/api/Tables/AddTable', table)
+    }
+
+    getTable(): Observable<object[]> {
+        return this.httpClinet.get('/api/Tables/GetTables') as Observable<object[]>
     }
 }

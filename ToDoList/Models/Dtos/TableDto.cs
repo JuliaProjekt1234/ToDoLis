@@ -1,8 +1,8 @@
 ﻿namespace ToDoList.Models.Dtos;
 
-public class TableDto
+public class TableDto: BaseTableDto
 {
-    public string Name { get; set; }
-    public string Color { get; set; }
-    public string Description { get; set; }
+    public int Id { get; set; }
+
+    public List<TaskDto> Tasks { get; set; }
 }
