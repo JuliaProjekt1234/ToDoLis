@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Table } from 'src/app/models/table.model';
-import { TablesHttpService } from 'src/app/services/http-services/tables-http.service';
-
 
 @Component({
   selector: 'table',
@@ -10,6 +8,6 @@ import { TablesHttpService } from 'src/app/services/http-services/tables-http.se
 })
 export class TableComponent {
 
-  public table: Table = Table.CreateDefault();
+  @Input() table: Table = Table.CreateDefault();
 
 }

@@ -16,10 +16,8 @@ export class TablesComponent {
     private tablesHttpService: TablesHttpService
   ) {
     this.tablesHttpService.getTable().subscribe(tables => {
-      console.log(tables, "jjij")
-      // this.tables = tables
-    },
-      (error) => { console.log("kflkflerf ", error) })
+      this.tables = tables
+    });
   }
 
 }
