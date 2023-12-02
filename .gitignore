@@ -1,0 +1,11 @@
+.vs/
+/packages/
+*.dll
+*.v2
+*.suo
+ToDoList/.vs/ToDoList/v17/.suo
+ToDoList/.vs/ToDoList2/DesignTimeBuild/.dtbcache.v2
+ToDoList/obj/Debug/net7.0/ToDoList.pdb
+ToDoList/obj/Debug/net7.0/refint/ToDoList.dll
+ToDoList/obj/Debug/net7.0/ref/ToDoList.dll
+ToDoList/obj/Debug/net7.0/ToDoList.csproj.CoreCompileInputs.cache
