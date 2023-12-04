@@ -1,7 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.Extensions.Options;
-using System.Reflection.Metadata;
 using ToDoList.Models;
 
 namespace ToDoList.Db;
@@ -24,6 +21,7 @@ public class ToDoListDbContext : DbContext, IToDoListDbContext
         modelBuilder.Entity<Models.Task>()
            .HasOne(e => e.Table)
            .WithMany(e => e.Tasks)
+           .HasForeignKey(e => e.TableId)
            .IsRequired();
     }
     public DbSet<Table> Tables { get; set; }
@@ -37,6 +35,11 @@ public class ToDoListDbContext : DbContext, IToDoListDbContext
     public Task<List<TEntity>> GetEntities<TEntity>() where TEntity : class
     {
         return Set<TEntity>().ToListAsync();
+    }
+
+    public ValueTask<TEntity> GetEntity<TEntity>(int id) where TEntity : BaseEntity
+    {
+        return Set<TEntity>().FindAsync(id);
     }
 
 }

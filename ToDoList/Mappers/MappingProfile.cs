@@ -22,9 +22,22 @@ public class MappingProfile : Profile
 
         CreateMap<Table, BaseTableDto>();
         CreateMap<BaseTableDto, Table>();
-        //.ForMember(dst => dst.Tasks, opt => opt.MapFrom(src => src.Tasks as ICollection<Task>));
 
-        //CreateMap<TableDto, TableDto>();
+        CreateMap<TaskDto, Models.Task>();
+        CreateMap<Models.Task, TaskDto>();
+
+        CreateMap<Models.Task, BaseTaskDto>()
+            .ForMember(dst => dst.Name, opt => opt.MapFrom(src => src.Name))
+            .ForMember(dst => dst.Description, opt => opt.MapFrom(src => src.Description))
+            .ForMember(dst => dst.TableId, opt => opt.MapFrom(src => src.TableId))
+            .ForMember(dst => dst.Done, opt => opt.MapFrom(src => src.Done));
+
+        CreateMap<BaseTaskDto, Models.Task>()
+            .ForMember(dst => dst.Name, opt => opt.MapFrom(src => src.Name))
+            .ForMember(dst => dst.Description, opt => opt.MapFrom(src => src.Description))
+            .ForMember(dst => dst.TableId, opt => opt.MapFrom(src => src.TableId))
+            .ForMember(dst => dst.Done, opt => opt.MapFrom(src => src.Done));
+
     }
 
 }

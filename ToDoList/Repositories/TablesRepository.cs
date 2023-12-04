@@ -21,4 +21,9 @@ public class TablesRepository : ITablesRepository
     {
         return _dbContext.GetEntities<Table>();
     }
+
+    public ValueTask<Table> GetTable(int id)
+    {
+        return _dbContext.GetEntity<Table>(id);
+    }
 }

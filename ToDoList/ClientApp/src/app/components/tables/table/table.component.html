@@ -1,11 +1,11 @@
-<div class="w-[320px] h-full flex-col flex shadow-lg shadow-indigo-500/60 rounded bg-white border-solid border-4 p-[16px]"
+<div class="max-h-[80vh] w-[380px] h-full flex-col flex shadow-lg shadow-indigo-500/60 rounded bg-white border-solid border-4 p-[16px]"
     [style.borderColor]="table.color">
     <p class="text-lg text-center">{{table.name}}</p>
     <p class="text-sm text-center">{{table.description}}</p>
-    <div class="w-full flex items-center justify-center pt-[16px]">
-        <button class="p-[16px] rounded text-indigo-600 font-semibold">+ Add new task</button>
+    <div class="w-full flex items-center justify-center pt-[16px] flex-col">
+        <task-tools (addedNewTask)="fetchTasks()" [tableId]="table.id"></task-tools>
     </div>
-    <div class="bg-slate-500 min-h-0 max-h-full h-full overflow-y-auto scroll flex-col">
-
+    <div class="min-h-0 max-h-full h-full overflow-y-auto scroll flex-col gap-[2px] mt-[8px]">
+        <task-info [task]="task" *ngFor="let task of table.tasks"></task-info>
     </div>
 </div>

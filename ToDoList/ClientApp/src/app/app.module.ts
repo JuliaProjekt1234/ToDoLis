@@ -11,6 +11,10 @@ import { ColorPickerButtonComponent } from './components/add-table/color-picker/
 import { ReactiveFormsModule } from '@angular/forms';
 import { TablesComponent } from './components/tables/tables.component';
 import { TableComponent } from './components/tables/table/table.component';
+import { TaskToolsComponent } from './components/tables/table/task/task-tools/task-tools.component';
+import { TaskToolsButtonComponent } from './components/tables/table/task/task-tools/add-task-form/task-tools-button.component';
+import { TaskInfoComponent } from './components/tables/table/task/task-info/task-info.component';
+
 
 
 @NgModule({
@@ -20,8 +24,11 @@ import { TableComponent } from './components/tables/table/table.component';
     TableComponent,
     TablesComponent,
     AddTableComponent,
+    TaskInfoComponent,
+    TaskToolsComponent,
     ColorPickerComponent,
-    ColorPickerButtonComponent
+    TaskToolsButtonComponent,
+    ColorPickerButtonComponent,
   ],
   imports: [
     BrowserModule,

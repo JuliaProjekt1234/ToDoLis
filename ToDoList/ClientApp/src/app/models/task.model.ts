@@ -1,5 +1,6 @@
 export class BaseTask {
     constructor(
+        public tableId: number,
         public name: string,
         public description: string,
         public done: boolean
@@ -11,8 +12,13 @@ export class Task extends BaseTask {
         public id: number,
         name: string,
         description: string,
-        done: boolean
+        done: boolean,
+        tableId: number
     ) {
-        super(name, description, done)
+        super(tableId, name, description, done)
+    }
+
+    public static CreateDefault(): Task {
+        return new Task(0, "", "", false, 0);
     }
 }

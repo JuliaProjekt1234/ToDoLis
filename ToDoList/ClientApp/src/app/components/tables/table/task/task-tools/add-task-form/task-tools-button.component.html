@@ -1,0 +1,19 @@
+<ng-container *ngIf="showAddTaskForm; then newTaskTools; else addNewTaskButton">
+</ng-container>
+
+<ng-template #addNewTaskButton>
+    <button type="button" class="p-[16px] rounded text-indigo-600 font-semibold" (click)="toggleTaskForm()">
+        + Add new task
+    </button>
+</ng-template>
+<ng-template #newTaskTools>
+    <div class="w-full flex items-center justify-center gap-[24px] pb-[16px]">
+        <button type="button" class="p-[16px] rounded text-indigo-600 font-semibold" (click)="toggleTaskForm()">
+            Cancel
+        </button>
+        <button type="button" class="p-[8px] rounded  text-white bg-indigo-600 font-semibold w-[84px]"
+            (click)="saveTask()">
+            Save
+        </button>
+    </div>
+</ng-template>

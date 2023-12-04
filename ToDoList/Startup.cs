@@ -48,6 +48,7 @@ public class Startup
 
         services.AddScoped<IToDoListDbContext, ToDoListDbContext>();
         services.AddScoped<ITablesRepository, TablesRepository>();
+        services.AddScoped<ITasksRepository, TasksRepository>();
         services.AddSingleton(mapper);
 
 

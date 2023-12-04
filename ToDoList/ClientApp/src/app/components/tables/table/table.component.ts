@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Table } from 'src/app/models/table.model';
+import { TablesHttpService } from 'src/app/services/http-services/tables-http.service';
 
 @Component({
   selector: 'table',
@@ -9,5 +10,9 @@ import { Table } from 'src/app/models/table.model';
 export class TableComponent {
 
   @Input() table: Table = Table.CreateDefault();
+  @Output() fetchNewTask = new EventEmitter<number>();
 
+  fetchTasks() {
+    this.fetchNewTask.emit(this.table.id);
+  }
 }
