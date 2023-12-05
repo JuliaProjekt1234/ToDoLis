@@ -15,6 +15,7 @@ import { TaskToolsComponent } from './components/tables/table/task/task-tools/ta
 import { TaskToolsButtonComponent } from './components/tables/table/task/task-tools/add-task-form/task-tools-button.component';
 import { TaskInfoComponent } from './components/tables/table/task/task-info/task-info.component';
 import { TableToolsComponent } from './components/tables/table/table-tools/table-tools.component';
+import { TaskButtonsComponent } from './components/tables/table/task/task-info/task-buttons/task-buttons.component';
 
 
 
@@ -29,6 +30,7 @@ import { TableToolsComponent } from './components/tables/table/table-tools/table
     TaskToolsComponent,
     TableToolsComponent,
     ColorPickerComponent,
+    TaskButtonsComponent,
     TaskToolsButtonComponent,
     ColorPickerButtonComponent,
   ],
