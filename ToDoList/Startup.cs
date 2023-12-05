@@ -2,9 +2,10 @@
 using ToDoList.Db;
 using ToDoList.Repositories;
 using AutoMapper;
-using Microsoft.Extensions.DependencyInjection;
+using MediatR;
 using ToDoList.Mappers;
-using Newtonsoft.Json.Serialization;
+using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace ToDoList;
 
@@ -51,8 +52,7 @@ public class Startup
         services.AddScoped<ITasksRepository, TasksRepository>();
         services.AddSingleton(mapper);
 
-
-
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
     }
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {

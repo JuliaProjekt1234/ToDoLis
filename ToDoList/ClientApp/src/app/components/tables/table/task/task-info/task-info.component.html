@@ -1,5 +1,6 @@
-<div class="w-full p-[2px] gap-[8px] flex items-center pl-[8px]">
-    <input type="checkbox" />
+<div class="w-full p-[2px] gap-[8px] flex items-center pl-[8px]"
+    [ngClass]="{'line-through ': task.done}">
+    <input type="checkbox" [(ngModel)]="!task.done" (change)="updateCheckedTask($event)" />
     <p>{{task.name}}</p>
     <i class="text-sm">{{task.description}}</i>
 </div>

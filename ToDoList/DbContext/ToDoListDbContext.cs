@@ -41,5 +41,9 @@ public class ToDoListDbContext : DbContext, IToDoListDbContext
     {
         return Set<TEntity>().FindAsync(id);
     }
-
+    public async System.Threading.Tasks.Task UpdateEntity<TEntity>(TEntity entity) where TEntity : BaseEntity
+    {
+        Set<TEntity>().Update(entity);
+        await SaveChangesAsync();
+    }
 }

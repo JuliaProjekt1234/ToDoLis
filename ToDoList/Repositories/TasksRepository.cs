@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ToDoList.Db;
-using ToDoList.Models.Dtos;
+﻿using ToDoList.Db;
 
 namespace ToDoList.Repositories;
 
@@ -17,4 +15,15 @@ public class TasksRepository : ITasksRepository
     {
         await _dbContext.AddEntity(task);
     }
+
+    public ValueTask<Models.Task> GetTask(int id) 
+    {
+        return _dbContext.GetEntity<Models.Task>(id);
+    }
+
+    public Task UpdateTask(Models.Task task)
+    {
+        return _dbContext.UpdateEntity(task);
+    }
+
 }

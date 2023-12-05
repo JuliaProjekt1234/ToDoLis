@@ -10,4 +10,8 @@ export class TaskHttpService {
     addNewTask(task: BaseTask): Observable<object> {
         return this.httpClinet.put('/api/Tasks/AddTask', task)
     }
+
+    changeTaskDoneValue(taskId: number){
+        return this.httpClinet.get(`/api/Tasks/ChangeTaskDoneValue/${taskId}`)
+    }
 }
