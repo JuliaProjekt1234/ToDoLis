@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AppConstants } from 'src/app/constants/app-constants';
 
 @Component({
@@ -7,9 +7,10 @@ import { AppConstants } from 'src/app/constants/app-constants';
   styleUrls: ['./color-picker.component.scss']
 })
 export class ColorPickerComponent {
+  @Input() activeColor = AppConstants.ColorsToPicker[0];
   @Output() colorSelected = new EventEmitter<string>();
+  
   public colors = AppConstants.ColorsToPicker;
-  public activeColor = AppConstants.ColorsToPicker[0];
 
   selectColor(color: string) {
     this.activeColor = color;

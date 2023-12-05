@@ -22,4 +22,8 @@ export class TablesHttpService {
     deleteTable(id: number) {
         return this.httpClinet.delete(`/api/Tables/DeleteTable/${id}`);
     }
+
+    updateTable(table: Table){
+        return this.httpClinet.put(`/api/Tables/UpdateTable`, table);
+    }
 }

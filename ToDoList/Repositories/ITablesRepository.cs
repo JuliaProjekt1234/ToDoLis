@@ -8,5 +8,6 @@ public interface ITablesRepository
     public Task<List<Table>> GetTables();
     public ValueTask<Table> GetTable(int id);
     public System.Threading.Tasks.Task DeleteTable(Table table);
+    public System.Threading.Tasks.Task UpdateTable(Table table);
 
 }

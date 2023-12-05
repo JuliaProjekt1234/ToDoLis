@@ -52,6 +52,12 @@ public class TablesController : ControllerBase
     [HttpDelete(nameof(DeleteTable) + "/{id}")]
     public async System.Threading.Tasks.Task DeleteTable([FromRoute] int id)
     {
-       await _mediator.Send(new DeleteTableCommand(id));
+        await _mediator.Send(new DeleteTableCommand(id));
+    }
+
+    [HttpPut(nameof(UpdateTable))]
+    public async System.Threading.Tasks.Task UpdateTable([FromBody] TableDto tableDto)
+    {
+        await _tablesRepository.UpdateTable(_mapper.Map<Table>(tableDto));
     }
 }

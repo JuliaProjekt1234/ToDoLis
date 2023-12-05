@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Output } from '@angular/core';
 
 
 @Component({
@@ -8,12 +8,25 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class TableToolsComponent {
   @Output() deletedTable = new EventEmitter<void>();
+  @Output() updatedTable = new EventEmitter<void>();
+
   public showMenu: boolean = false
 
-  public toggleMenu() {
-    this.showMenu = !this.showMenu
+  public toggleMenu(event: MouseEvent) {
+    this.showMenu = !this.showMenu;
+    event.stopPropagation();
   }
-  deleteTable() {
+
+  public deleteTable() {
     this.deletedTable.emit();
+  }
+
+  public updateTable() {
+    this.updatedTable.emit();
+  }
+
+  @HostListener('document:click')
+  onClick() {
+    this.showMenu = false
   }
 }

@@ -23,4 +23,11 @@ export class Table extends BaseTable {
     public static CreateDefault() {
         return new Table(0, [], "", "", "");
     }
+
+    public static CreateFromBaseTable(baseTable: BaseTable, id: number): Table {
+        let table = baseTable as Table;
+        table.id = id;
+        table.tasks = [];
+        return table;
+    }
 }

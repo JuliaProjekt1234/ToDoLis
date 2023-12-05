@@ -31,4 +31,8 @@ public class TablesRepository : ITablesRepository
     {
         return _dbContext.DeleteEntity<Table>(table);
     }
+    public System.Threading.Tasks.Task UpdateTable(Table table)
+    {
+        return _dbContext.UpdateEntity<Table>(table);
+    }
 }

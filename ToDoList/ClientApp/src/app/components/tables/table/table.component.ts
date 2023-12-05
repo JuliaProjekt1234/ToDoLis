@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Table } from 'src/app/models/table.model';
-import { TablesHttpService } from 'src/app/services/http-services/tables-http.service';
 
 @Component({
   selector: 'table',
@@ -13,11 +13,17 @@ export class TableComponent {
   @Output() fetchNewTask = new EventEmitter<number>();
   @Output() deletedTable = new EventEmitter<number>();
 
+  constructor(private router: Router) { }
+
   fetchTasks() {
     this.fetchNewTask.emit(this.table.id);
   }
 
   deleteTable() {
     this.deletedTable.emit(this.table.id);
+  }
+
+  updateTable() {
+    this.router.navigate(['/add_table'], { state: { table: this.table } });
   }
 }
