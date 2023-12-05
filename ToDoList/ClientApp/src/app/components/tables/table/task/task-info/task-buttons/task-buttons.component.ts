@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'task-buttons',
@@ -6,9 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./task-buttons.component.scss']
 })
 export class TaskButtonsComponent {
-
+  @Output() deletedTask = new EventEmitter<void>();
 
   constructor() { }
 
+  public deleteTask() {
+    this.deletedTask.emit();
+  }
 
 }

@@ -26,4 +26,9 @@ public class TasksRepository : ITasksRepository
         return _dbContext.UpdateEntity(task);
     }
 
+    public Task DeleteTask(Models.Task task)
+    {
+        return _dbContext.DeleteEntity(task);
+    }
+
 }

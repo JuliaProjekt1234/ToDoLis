@@ -42,4 +42,10 @@ public class TasksController : ControllerBase
     {
         await _mediator.Send(new ChangeTaskDoneValueCommand(id));
     }
+
+    [HttpDelete(nameof(DeleteTask) + "/{id}")]
+    public async Task DeleteTask([FromRoute] int id)
+    {
+        await _mediator.Send(new DeleteTaskCommand(id));
+    }
 }

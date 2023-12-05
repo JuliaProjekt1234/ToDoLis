@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { BaseTask, Task } from "src/app/models/task.model";
+import { BaseTask } from "src/app/models/task.model";
 
 @Injectable({ providedIn: 'root' })
 export class TaskHttpService {
@@ -13,5 +13,9 @@ export class TaskHttpService {
 
     changeTaskDoneValue(taskId: number){
         return this.httpClinet.get(`/api/Tasks/ChangeTaskDoneValue/${taskId}`)
+    }
+
+    deleteTask(taskId:number){
+        return this.httpClinet.delete(`/api/Tasks/DeleteTask/${taskId}`)
     }
 }

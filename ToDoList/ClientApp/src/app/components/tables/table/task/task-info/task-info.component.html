@@ -4,5 +4,5 @@
         <p>{{task.name}}</p>
         <i class="text-sm">{{task.description}}</i>
     </div>
-    <task-buttons></task-buttons>
+    <task-buttons (deletedTask)="deleteTask()"></task-buttons>
 </div>
