@@ -8,7 +8,7 @@ export class TablesHttpService {
     constructor(private httpClinet: HttpClient) { }
 
     addNewTable(table: BaseTable) {
-        return this.httpClinet.put('/api/Tables/AddTable', table)
+        return this.httpClinet.post('/api/Tables/AddTable', table)
     }
 
     getTables(): Observable<Table[]> {

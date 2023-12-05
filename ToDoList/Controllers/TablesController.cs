@@ -37,7 +37,7 @@ public class TablesController : ControllerBase
         return _mapper.Map<List<TableDto>>((await _tablesRepository.GetTables()));
     }
 
-    [HttpPut(nameof(AddTable))]
+    [HttpPost(nameof(AddTable))]
     public System.Threading.Tasks.Task AddTable([FromBody] BaseTableDto tableDto)
     {
         return _tablesRepository.Add(_mapper.Map<Table>(tableDto));

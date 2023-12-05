@@ -8,7 +8,7 @@ export class TaskHttpService {
     constructor(private httpClinet: HttpClient) { }
 
     addNewTask(task: BaseTask): Observable<object> {
-        return this.httpClinet.put('/api/Tasks/AddTask', task)
+        return this.httpClinet.post('/api/Tasks/AddTask', task)
     }
 
     changeTaskDoneValue(taskId: number){

@@ -31,7 +31,7 @@ public class TasksController : ControllerBase
         _tasksRepository = tasksRepository;
     }
 
-    [HttpPut(nameof(AddTask))]
+    [HttpPost(nameof(AddTask))]
     public async Task AddTask([FromBody] BaseTaskDto taskDto)
     {
         await _tasksRepository.AddNewTask(_mapper.Map<ToDoList.Models.Task>(taskDto));
