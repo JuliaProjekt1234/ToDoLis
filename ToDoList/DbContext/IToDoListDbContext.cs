@@ -8,4 +8,5 @@ public interface IToDoListDbContext
     public Task<List<TEntity>> GetEntities<TEntity>() where TEntity : class;
     public ValueTask<TEntity> GetEntity<TEntity>(int id) where TEntity : BaseEntity;
     public System.Threading.Tasks.Task UpdateEntity<TEntity>(TEntity entity) where TEntity : BaseEntity;
+    public System.Threading.Tasks.Task DeleteEntity<TEntity>(TEntity entity) where TEntity : BaseEntity;
 }

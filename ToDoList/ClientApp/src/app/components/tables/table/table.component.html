@@ -1,5 +1,6 @@
-<div class="max-h-[80vh] w-[380px] h-full flex-col flex shadow-lg shadow-indigo-500/60 rounded bg-white border-solid border-4 p-[16px]"
+<div class="max-h-[80vh] w-[380px] relative h-full flex-col flex shadow-lg shadow-indigo-500/60 rounded bg-white border-solid border-4 p-[16px]"
     [style.borderColor]="table.color">
+    <table-tools class="absolute top-[16px] right-[4px]" (deletedTable)="deleteTable()"></table-tools>
     <p class="text-lg text-center">{{table.name}}</p>
     <p class="text-sm text-center">{{table.description}}</p>
     <div class="w-full flex items-center justify-center pt-[16px] flex-col">

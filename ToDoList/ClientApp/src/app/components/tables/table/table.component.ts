@@ -11,8 +11,13 @@ export class TableComponent {
 
   @Input() table: Table = Table.CreateDefault();
   @Output() fetchNewTask = new EventEmitter<number>();
+  @Output() deletedTable = new EventEmitter<number>();
 
   fetchTasks() {
     this.fetchNewTask.emit(this.table.id);
+  }
+
+  deleteTable() {
+    this.deletedTable.emit(this.table.id);
   }
 }

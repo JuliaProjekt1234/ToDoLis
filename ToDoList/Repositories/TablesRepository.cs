@@ -26,4 +26,9 @@ public class TablesRepository : ITablesRepository
     {
         return _dbContext.GetEntity<Table>(id);
     }
+
+    public System.Threading.Tasks.Task DeleteTable(Table table)
+    {
+        return _dbContext.DeleteEntity<Table>(table);
+    }
 }

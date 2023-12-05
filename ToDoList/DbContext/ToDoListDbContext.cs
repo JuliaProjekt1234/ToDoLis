@@ -46,4 +46,10 @@ public class ToDoListDbContext : DbContext, IToDoListDbContext
         Set<TEntity>().Update(entity);
         await SaveChangesAsync();
     }
+
+    public async System.Threading.Tasks.Task DeleteEntity<TEntity>(TEntity entity) where TEntity : BaseEntity
+    {
+        Set<TEntity>().Remove(entity);
+        await SaveChangesAsync();
+    }
 }

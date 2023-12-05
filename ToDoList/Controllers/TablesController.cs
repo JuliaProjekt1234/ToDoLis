@@ -1,5 +1,7 @@
 using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using ToDoList.Commands.Command;
 using ToDoList.Models;
 using ToDoList.Models.Dtos;
 using ToDoList.Repositories;
@@ -11,18 +13,21 @@ namespace ToDoLists.Controllers;
 [Produces("application/json")]
 public class TablesController : ControllerBase
 {
+    private readonly IMapper _mapper;
+    private readonly IMediator _mediator;
     private readonly ILogger<TablesController> _logger;
     private readonly ITablesRepository _tablesRepository;
-    private readonly IMapper _mapper;
 
     public TablesController(
         IMapper mapper,
+        IMediator mediator,
         ILogger<TablesController> logger,
         ITablesRepository tablesRepository
         )
     {
         _mapper = mapper;
         _logger = logger;
+        _mediator = mediator;
         _tablesRepository = tablesRepository;
     }
 
@@ -42,5 +47,11 @@ public class TablesController : ControllerBase
     public async ValueTask<TableDto> GetTable([FromRoute] int id)
     {
         return _mapper.Map<TableDto>(await _tablesRepository.GetTable(id));
+    }
+
+    [HttpDelete(nameof(DeleteTable) + "/{id}")]
+    public async System.Threading.Tasks.Task DeleteTable([FromRoute] int id)
+    {
+       await _mediator.Send(new DeleteTableCommand(id));
     }
 }

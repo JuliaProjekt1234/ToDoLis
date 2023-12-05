@@ -1,0 +1,12 @@
+<div class="w-[24px] h-[24px] flex flex-col items-center justify-around rounded-full cursor-pointer relative"
+    (click)="toggleMenu()">
+    <div class="w-[4px] h-[4px] shadow-indigo-500/60 bg-indigo-600 rounded-full"></div>
+    <div class="w-[4px] h-[4px] shadow-indigo-500/60 bg-indigo-600 rounded-full"></div>
+    <div class="w-[4px] h-[4px] shadow-indigo-500/60 bg-indigo-600 rounded-full"></div>
+</div>
+
+<div *ngIf="showMenu"
+    class="absolute bg-white w-fit p-[8px] pr-[16px] shadow-lg shadow-indigo-500/60 top-0 left-0 translate-x-[-100%] text-xs">
+    <button class="text-indigo-600 font-semibold mb-[4px]">edit</button>
+    <button class="text-red-600 font-semibold" (click)="deleteTable()">delete</button>
+</div>

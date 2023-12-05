@@ -7,7 +7,7 @@ import { BaseTable, Table } from "src/app/models/table.model";
 export class TablesHttpService {
     constructor(private httpClinet: HttpClient) { }
 
-    addNewTable(table: BaseTable){
+    addNewTable(table: BaseTable) {
         return this.httpClinet.put('/api/Tables/AddTable', table)
     }
 
@@ -17,5 +17,9 @@ export class TablesHttpService {
 
     getTable(id: number): Observable<Table> {
         return this.httpClinet.get(`/api/Tables/GetTable/${id}`) as Observable<Table>
+    }
+
+    deleteTable(id: number) {
+        return this.httpClinet.delete(`/api/Tables/DeleteTable/${id}`);
     }
 }

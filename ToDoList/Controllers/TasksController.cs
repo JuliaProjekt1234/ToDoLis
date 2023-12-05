@@ -13,10 +13,10 @@ namespace ToDoLists.Controllers;
 [Produces("application/json")]
 public class TasksController : ControllerBase
 {
+    private readonly IMapper _mapper;
+    private readonly IMediator _mediator;
     private readonly ILogger<TablesController> _logger;
     private readonly ITasksRepository _tasksRepository;
-    private readonly IMediator _mediator;
-    private readonly IMapper _mapper;
 
     public TasksController(
         IMapper mapper,

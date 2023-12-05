@@ -23,8 +23,17 @@ export class TablesComponent {
 
   refreshTable(tableId: number) {
     this.tableHttpService.getTable(tableId).subscribe((changedTable) => {
-      var indexOfChangedTable = this.tables.findIndex(table => table.id === changedTable.id);
-      this.tables[indexOfChangedTable] = changedTable;
+      this.tables[this.findIndexInTablesById(changedTable.id)] = changedTable;
     });
+  }
+
+  deleteTable(tableId: number) {
+    this.tableHttpService.deleteTable(tableId).subscribe(() => {
+      this.tables.splice(this.findIndexInTablesById(tableId), 1)
+    })
+  }
+
+  private findIndexInTablesById(id: number): number {
+    return this.tables.findIndex(table => table.id === id);
   }
 }
