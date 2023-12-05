@@ -8,6 +8,6 @@
         <task-tools (addedNewTask)="fetchTasks()" [tableId]="table.id"></task-tools>
     </div>
     <div class="min-h-0 max-h-full h-full overflow-y-auto scroll flex-col gap-[2px] mt-[8px]">
-        <task-info (deletedTask)="fetchTasks()" [task]="task" *ngFor="let task of table.tasks"></task-info>
+        <task-info (fetchTasks)="fetchTasks()" [task]="task" *ngFor="let task of table.tasks"></task-info>
     </div>
 </div>

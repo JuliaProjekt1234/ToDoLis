@@ -1,8 +1,16 @@
 <div class="w-full p-[2px] pl-[8px] flex justify-between">
+    <ng-container *ngIf="showTaskForm; then taskForm; else taskInfo">
+    </ng-container>
+</div>
+
+<ng-template #taskInfo>
     <div class="gap-[8px] flex items-center" [ngClass]="{'line-through ': task.done}">
-        <input type="checkbox" [(ngModel)]="!task.done" (change)="updateCheckedTask($event)" />
+        <input type="checkbox" [(ngModel)]="task.done" (change)="updateCheckedTask($event)" />
         <p>{{task.name}}</p>
         <i class="text-sm">{{task.description}}</i>
     </div>
-    <task-buttons (deletedTask)="deleteTask()"></task-buttons>
-</div>
+    <task-buttons (deletedTask)="deleteTask()" (toggledEditTaskForm)="toggleEditTaskForm()"></task-buttons>
+</ng-template>
+<ng-template #taskForm>
+    <task-tools [showAddTaskForm]="true" [task]="taskToUpdate" [onToggleTaskForm]="toggle" (updatedTask)="updateTask()"></task-tools>
+</ng-template>

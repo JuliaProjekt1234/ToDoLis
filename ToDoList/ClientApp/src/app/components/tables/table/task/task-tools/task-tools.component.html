@@ -1,5 +1,5 @@
 <div class="w-full flex items-center justify-center pt-[16px] flex-col">
-    <task-tools-button [showAddTaskForm]="showAddTaskForm" (toggledTaskForm)="toggleTaskForm()"
+    <task-tools-button [showAddTaskForm]="showAddTaskForm" (toggledTaskForm)="onToggleTaskForm()"
         (savedTask)="submit()"></task-tools-button>
 
     <form class="w-full flex gap-[8px]" [formGroup]="taskForm" *ngIf="showAddTaskForm">

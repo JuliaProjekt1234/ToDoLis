@@ -48,4 +48,10 @@ public class TasksController : ControllerBase
     {
         await _mediator.Send(new DeleteTaskCommand(id));
     }
+
+    [HttpPut(nameof(UpdateTask))]
+    public async Task UpdateTask([FromBody] TaskToUpdateDto taskToUpdateDto)
+    {
+        await _mediator.Send(new UpdateTaskCommand(taskToUpdateDto));
+    }
 }

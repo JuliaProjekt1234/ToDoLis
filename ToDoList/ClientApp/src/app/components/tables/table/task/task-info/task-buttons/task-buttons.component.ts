@@ -7,8 +7,13 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class TaskButtonsComponent {
   @Output() deletedTask = new EventEmitter<void>();
+  @Output() toggledEditTaskForm = new EventEmitter<void>();
 
   constructor() { }
+
+  public updateTable() {
+    this.toggledEditTaskForm.emit();
+  }
 
   public deleteTask() {
     this.deletedTask.emit();

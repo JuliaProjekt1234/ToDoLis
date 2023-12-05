@@ -4,7 +4,24 @@ export class BaseTask {
         public name: string,
         public description: string,
         public done: boolean
+    ) {
+    }
+}
+
+export class TaskToUpdate {
+    constructor(
+        public id: number,
+        public name: string,
+        public description: string,
     ) { }
+
+    public static CreateDefault(): TaskToUpdate {
+        return new TaskToUpdate(0, "", "");
+    }
+
+    public static CreateFromTask(task: Task): TaskToUpdate {
+        return new TaskToUpdate(task.id, task.name, task.description);
+    }
 }
 
 export class Task extends BaseTask {
