@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Data;
+using System.Linq.Expressions;
 using ToDoList.Models;
 
 namespace ToDoList.Db;
@@ -9,8 +11,17 @@ public class ToDoListDbContext : DbContext, IToDoListDbContext
     {
     }
 
+    [DbFunction("Compare")]
+    public static bool Compare(string value, string valueToCompare) =>
+        throw new NotImplementedException("Mapping by ef - implemented as tsql function");
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.HasDbFunction(typeof(ToDoListDbContext).GetMethod(nameof(Compare),
+        new[] { typeof(string), typeof(string) }))
+        .HasName("Compare");
 
         modelBuilder.Entity<Table>()
             .HasMany(e => e.Tasks)
@@ -26,13 +37,14 @@ public class ToDoListDbContext : DbContext, IToDoListDbContext
     }
     public DbSet<Table> Tables { get; set; }
     public DbSet<Models.Task> Tasks { get; set; }
-    public async System.Threading.Tasks.Task AddEntity<TEntity>(TEntity entity) where TEntity : class
+    public async System.Threading.Tasks.Task AddEntity<TEntity>(TEntity entity) where TEntity : BaseEntity
     {
         Set<TEntity>().Add(entity);
         await SaveChangesAsync();
     }
 
-    public Task<List<TEntity>> GetEntities<TEntity>() where TEntity : class
+
+    public Task<List<TEntity>> GetEntities<TEntity>() where TEntity : BaseEntity
     {
         return Set<TEntity>().ToListAsync();
     }
@@ -51,5 +63,10 @@ public class ToDoListDbContext : DbContext, IToDoListDbContext
     {
         Set<TEntity>().Remove(entity);
         await SaveChangesAsync();
+    }
+
+    public Task<List<TEntity>> GetEntities<TEntity>(Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, TEntity>> selectEpression) where TEntity : BaseEntity
+    {
+        return Set<TEntity>().Where(whereExpression).Select(selectEpression).ToListAsync();
     }
 }

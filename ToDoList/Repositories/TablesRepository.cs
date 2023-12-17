@@ -1,5 +1,7 @@
-﻿using ToDoList.Db;
+﻿using System.Linq.Expressions;
+using ToDoList.Db;
 using ToDoList.Models;
+using ToDoList.Models.Dtos;
 
 namespace ToDoList.Repositories;
 
@@ -34,5 +36,31 @@ public class TablesRepository : ITablesRepository
     public System.Threading.Tasks.Task UpdateTable(Table table)
     {
         return _dbContext.UpdateEntity<Table>(table);
+    }
+
+    public Task<List<Table>> GetFilteredTables(FilterTableDto filter)
+    {
+        return _dbContext.GetEntities(GetFilterWhereExpression(filter), GetFilterSelectExpression(filter));
+    }
+
+    private Expression<Func<Table, bool>> GetFilterWhereExpression(FilterTableDto filter)
+    {
+        return table =>
+        ToDoListDbContext.Compare(table.Name, filter.tableName)
+        && ToDoListDbContext.Compare(table.Description, filter.tableDescription);
+    }
+
+    private Expression<Func<Table, Table>> GetFilterSelectExpression(FilterTableDto filter)
+    {
+        return table =>
+            new Table()
+            {
+                Id = table.Id,
+                Name = table.Name,
+                Description = table.Description,
+                Color = table.Color,
+                Tasks = table.Tasks.Where(task => ToDoListDbContext.Compare(task.Name, filter.taskName) && ToDoListDbContext.Compare(task.Description, filter.taskDescription)).ToList()
+            };
+
     }
 }

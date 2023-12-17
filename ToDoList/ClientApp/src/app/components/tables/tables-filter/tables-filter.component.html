@@ -1,0 +1,11 @@
+<form class="w-full bg-white p-[16px] flex gap-[16px] rounded" [formGroup]="filterForm">
+    <input type="text" class="outline-none border-solid border-2 border-indigo-600 p-[4px] rounded text-xs w-full"
+        placeholder="Table name" formControlName="tableName" />
+    <input type="text" class="outline-none border-solid border-2 border-indigo-600 p-[4px] rounded text-xs w-full"
+        placeholder="Table description" formControlName="tableDescription" />
+    <input type="text" class="outline-none border-solid border-2 border-indigo-600 p-[4px] rounded text-xs w-full"
+        placeholder="Task name" formControlName="taskName" />
+    <input type="text" class="outline-none border-solid border-2 border-indigo-600 p-[4px] rounded text-xs w-full"
+        placeholder="Task description" formControlName="taskDescription" />
+    <button type="submit" class="px-[8px] rounded ml-[8px] text-xs text-white bg-indigo-600 font-semibold w-[84px]">Search</button>
+</form>

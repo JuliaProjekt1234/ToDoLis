@@ -17,7 +17,7 @@ export class TablesComponent {
     private tablesHttpService: TablesHttpService
   ) {
     this.tablesHttpService.getTables().subscribe(tables => {
-      this.tables = tables
+      this.tables = tables;
     });
   }
 

@@ -60,4 +60,10 @@ public class TablesController : ControllerBase
     {
         await _tablesRepository.UpdateTable(_mapper.Map<Table>(tableDto));
     }
+
+    [HttpPost(nameof(GetFilteredTable))]
+    public Task<List<Table>> GetFilteredTable([FromBody] FilterTableDto filterTableDto)
+    {
+        return _tablesRepository.GetFilteredTables(filterTableDto);
+    }
 }
