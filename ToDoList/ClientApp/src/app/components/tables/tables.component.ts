@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FilterModel } from 'src/app/models/filter.model';
 import { Table } from 'src/app/models/table.model';
 import { TablesHttpService } from 'src/app/services/http-services/tables-http.service';
 
@@ -16,14 +17,24 @@ export class TablesComponent {
     private tableHttpService: TablesHttpService,
     private tablesHttpService: TablesHttpService
   ) {
-    this.tablesHttpService.getTables().subscribe(tables => {
-      this.tables = tables;
-    });
+    this.fetchTables();
   }
 
   refreshTable(tableId: number) {
     this.tableHttpService.getTable(tableId).subscribe((changedTable) => {
       this.tables[this.findIndexInTablesById(changedTable.id)] = changedTable;
+    });
+  }
+
+  fetchTables() {
+    this.tablesHttpService.getTables().subscribe(tables => {
+      this.tables = tables;
+    });
+  }
+
+  filterTables(filter: FilterModel){
+    this.tablesHttpService.filterTable(filter).subscribe(tables => {
+      this.tables = tables;
     });
   }
 

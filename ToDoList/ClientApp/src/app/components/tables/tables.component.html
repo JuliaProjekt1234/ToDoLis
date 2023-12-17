@@ -1,5 +1,5 @@
 <div class="w-full h-full max-w-[100vw] gap-[24px] px-[16px] py-[16px] flex flex-col">
-    <tables-filter></tables-filter>
+    <tables-filter (clearFilter)="fetchTables()" (filterTables)="filterTables($event)"></tables-filter>
 
     <div class="scroll w-full h-full max-w-[100vw] overflow-x-auto gap-[24px]  px-[48px] flex overflow-y-hidden">
         <table (fetchNewTask)="refreshTable($event)" (deletedTable)="deleteTable($event)" *ngFor="let table of tables"

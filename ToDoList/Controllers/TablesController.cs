@@ -62,8 +62,8 @@ public class TablesController : ControllerBase
     }
 
     [HttpPost(nameof(GetFilteredTable))]
-    public Task<List<Table>> GetFilteredTable([FromBody] FilterTableDto filterTableDto)
+    public async Task<List<TableDto>> GetFilteredTable([FromBody] FilterTableDto filterTableDto)
     {
-        return _tablesRepository.GetFilteredTables(filterTableDto);
+        return _mapper.Map<List<TableDto>>(await _tablesRepository.GetFilteredTables(filterTableDto));
     }
 }

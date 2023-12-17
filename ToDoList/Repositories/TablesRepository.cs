@@ -47,7 +47,8 @@ public class TablesRepository : ITablesRepository
     {
         return table =>
         ToDoListDbContext.Compare(table.Name, filter.tableName)
-        && ToDoListDbContext.Compare(table.Description, filter.tableDescription);
+        || ToDoListDbContext.Compare(table.Description, filter.tableDescription)
+        || table.Tasks.Any(task => ToDoListDbContext.Compare(task.Name, filter.taskName) || ToDoListDbContext.Compare(task.Description, filter.taskDescription));
     }
 
     private Expression<Func<Table, Table>> GetFilterSelectExpression(FilterTableDto filter)
@@ -59,7 +60,7 @@ public class TablesRepository : ITablesRepository
                 Name = table.Name,
                 Description = table.Description,
                 Color = table.Color,
-                Tasks = table.Tasks.Where(task => ToDoListDbContext.Compare(task.Name, filter.taskName) && ToDoListDbContext.Compare(task.Description, filter.taskDescription)).ToList()
+                Tasks = table.Tasks.Where(task => ToDoListDbContext.Compare(task.Name, filter.taskName) || ToDoListDbContext.Compare(task.Description, filter.taskDescription)).ToList()
             };
 
     }
