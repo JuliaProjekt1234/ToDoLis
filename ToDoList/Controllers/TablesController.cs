@@ -1,5 +1,6 @@
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ToDoList.Commands.Command;
 using ToDoList.Models;
@@ -8,6 +9,7 @@ using ToDoList.Repositories;
 
 namespace ToDoLists.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 [Produces("application/json")]
@@ -34,13 +36,13 @@ public class TablesController : ControllerBase
     [HttpGet(nameof(GetTables))]
     public async Task<List<TableDto>> GetTables()
     {
-        return _mapper.Map<List<TableDto>>((await _tablesRepository.GetTables()));
+        return _mapper.Map<List<TableDto>>(await _tablesRepository.GetTables());
     }
 
     [HttpPost(nameof(AddTable))]
-    public System.Threading.Tasks.Task AddTable([FromBody] BaseTableDto tableDto)
+    public async System.Threading.Tasks.Task AddTable([FromBody] BaseTableDto tableDto)
     {
-        return _tablesRepository.Add(_mapper.Map<Table>(tableDto));
+        await _mediator.Send(new AddTableCommand(tableDto));
     }
 
     [HttpGet(nameof(GetTable) + "/{id}")]

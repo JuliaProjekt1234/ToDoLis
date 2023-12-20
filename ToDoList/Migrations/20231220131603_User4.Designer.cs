@@ -11,8 +11,8 @@ using ToDoList.Db;
 namespace ToDoList.Migrations
 {
     [DbContext(typeof(ToDoListDbContext))]
-    [Migration("20231202180715_AddForeignKey")]
-    partial class AddForeignKey
+    [Migration("20231220131603_User4")]
+    partial class User4
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,7 +47,12 @@ namespace ToDoList.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Tables");
                 });
@@ -79,6 +84,39 @@ namespace ToDoList.Migrations
                     b.HasIndex("TableId");
 
                     b.ToTable("Tasks");
+                });
+
+            modelBuilder.Entity("ToDoList.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("HashedPassword")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("ToDoList.Models.Table", b =>
+                {
+                    b.HasOne("ToDoList.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ToDoList.Models.Task", b =>

@@ -2,10 +2,12 @@
 using ToDoList.Db;
 using ToDoList.Repositories;
 using AutoMapper;
-using MediatR;
 using ToDoList.Mappers;
-using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using ToDoList.Services;
 
 namespace ToDoList;
 
@@ -47,9 +49,33 @@ public class Startup
             options.UseLazyLoadingProxies();
         });
 
+        services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        .AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = "to_do_list_issuer", 
+                ValidAudience = "to_do_list_audience",
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("to_do_list_secret_key_with_at_least_16_characters"))
+            };
+        });
+
+        services.AddHttpContextAccessor();
+
         services.AddScoped<IToDoListDbContext, ToDoListDbContext>();
         services.AddScoped<ITablesRepository, TablesRepository>();
         services.AddScoped<ITasksRepository, TasksRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IPasswordHasherService, PasswordHasherService>();
+        services.AddSingleton<IUserHttpContextService, UserHttpContextService>();
         services.AddSingleton(mapper);
 
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
@@ -65,6 +91,9 @@ public class Startup
 
         app.UseDefaultFiles();
         app.UseStaticFiles();
+
+        app.UseAuthentication();
+        app.UseAuthorization();
 
         app.UseEndpoints(endpoints =>
         {

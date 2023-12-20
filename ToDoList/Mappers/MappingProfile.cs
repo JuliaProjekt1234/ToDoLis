@@ -38,6 +38,8 @@ public class MappingProfile : Profile
             .ForMember(dst => dst.TableId, opt => opt.MapFrom(src => src.TableId))
             .ForMember(dst => dst.Done, opt => opt.MapFrom(src => src.Done));
 
+        CreateMap<UserDto, User>();
+        CreateMap<User, UserDto>();
     }
 
 }

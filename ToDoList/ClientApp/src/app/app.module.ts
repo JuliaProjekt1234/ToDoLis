@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { ListComponent } from './components/list/list.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AddTableComponent } from './components/add-table/add-table.component';
 import { ColorPickerComponent } from './components/add-table/color-picker/color-picker.component';
@@ -17,14 +16,18 @@ import { TaskInfoComponent } from './components/tables/table/task/task-info/task
 import { TableToolsComponent } from './components/tables/table/table-tools/table-tools.component';
 import { TaskButtonsComponent } from './components/tables/table/task/task-info/task-buttons/task-buttons.component';
 import { TablesFilterComponent } from './components/tables/tables-filter/tables-filter.component';
+import { RegistrationComponent } from './components/autentyfication/registration/registration.component';
+import { LoginComponent } from './components/autentyfication/login/login.component';
+import { ErrorInterceptor } from './services/interceptors/error-interceptor';
+import { AuthInterceptor } from './services/interceptors/auth-interceptor';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListComponent,
     TableComponent,
+    LoginComponent,
     TablesComponent,
     AddTableComponent,
     TaskInfoComponent,
@@ -32,6 +35,7 @@ import { TablesFilterComponent } from './components/tables/tables-filter/tables-
     TableToolsComponent,
     ColorPickerComponent,
     TaskButtonsComponent,
+    RegistrationComponent,
     TablesFilterComponent,
     TaskToolsButtonComponent,
     ColorPickerButtonComponent,
@@ -43,7 +47,10 @@ import { TablesFilterComponent } from './components/tables/tables-filter/tables-
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

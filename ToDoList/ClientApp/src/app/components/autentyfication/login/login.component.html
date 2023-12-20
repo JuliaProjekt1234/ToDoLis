@@ -1,0 +1,24 @@
+<div class="w-full h-full flex justify-center items-center">
+    <form [formGroup]="loginForm" (ngSubmit)="submit()" class="max-w-[840px] w-full">
+        <div
+            class=" px-[64px] py-[48px] bg-white min-w-[80%] shadow-lg shadow-indigo-500/60 rounded min-h-[500px] flex flex-col justify-center">
+            <div class="w-full flex flex-col mb-[32px] text-center">
+                <p class="text-2xl text-indigo-500 font-medium">Login</p>
+                <p class="text-base text-indigo-500">Create an account and start using our services!</p>
+            </div>
+
+                <input type="text"
+                    class="w-full outline-none border-solid border-2 border-indigo-600 mb-[16px] p-[8px] rounded"
+                    placeholder="login" formControlName="login" />
+                <input type="text"
+                    class="w-full outline-none border-solid border-2 border-indigo-600 mb-[16px] p-[8px] rounded"
+                    placeholder="password" formControlName="password" />
+
+                <button type="submit"
+                    class="mt-[16px] p-[16px] rounded text-white bg-indigo-600 font-semibold w-full">Login</button>
+                <p class="mt-[16px] text-sm text-center text-indigo-500">Don't have an account?
+                    <a [routerLink]="['/registration']" class="underline">Log in below!</a>
+                </p>
+        </div>
+    </form>
+</div>
