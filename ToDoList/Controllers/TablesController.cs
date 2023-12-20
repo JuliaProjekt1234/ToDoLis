@@ -36,7 +36,7 @@ public class TablesController : ControllerBase
     [HttpGet(nameof(GetTables))]
     public async Task<List<TableDto>> GetTables()
     {
-        return _mapper.Map<List<TableDto>>(await _tablesRepository.GetTables());
+        return await _mediator.Send(new GetTablesCommand());
     }
 
     [HttpPost(nameof(AddTable))]

@@ -69,7 +69,7 @@ public class ToDoListDbContext : Microsoft.EntityFrameworkCore.DbContext, IToDoL
     {
         return Set<TEntity>().FirstOrDefaultAsync(expression);
     }
-    
+
     public async System.Threading.Tasks.Task UpdateEntity<TEntity>(TEntity entity) where TEntity : BaseEntity
     {
         Set<TEntity>().Update(entity);
@@ -82,8 +82,12 @@ public class ToDoListDbContext : Microsoft.EntityFrameworkCore.DbContext, IToDoL
         await SaveChangesAsync();
     }
 
-    public Task<List<TEntity>> GetEntities<TEntity>(Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, TEntity>> selectEpression) where TEntity : BaseEntity
+    public Task<List<TEntity>> GetEntities<TEntity>(Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, TEntity>>? selectEpression = null) where TEntity : BaseEntity
     {
-        return Set<TEntity>().Where(whereExpression).Select(selectEpression).ToListAsync();
+        var result = Set<TEntity>().Where(whereExpression);
+        if (selectEpression != null)
+            result = result.Select(selectEpression);
+
+        return result.ToListAsync();
     }
 }

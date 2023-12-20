@@ -19,9 +19,9 @@ public class TablesRepository : ITablesRepository
         await _dbContext.AddEntity(table);
     }
 
-    public Task<List<Table>> GetTables()
+    public Task<List<Table>> GetTables(int userId)
     {
-        return _dbContext.GetEntities<Table>();
+        return _dbContext.GetEntities<Table>(table => table.UserId == userId);
     }
 
     public ValueTask<Table> GetTable(int id)
