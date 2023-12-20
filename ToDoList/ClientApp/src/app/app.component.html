@@ -1,5 +1,7 @@
 <div class="w-full relative h-[100vh] bg-bg-primary">
   <router-outlet></router-outlet>
-  <a routerLink="/add_table"
-    class="plus font-semibold shadow-lg shadow-indigo-500/60 text-white flex items-center justify-center p-0 m-0 w-[64px] bg-custom-green h-[64px] rounded-full absolute bottom-[24px] right-[24px] cursor-pointer"></a>
+
+  <div (click)="logout()" *ngIf="showLogOutButton" class="flex items-center justify-center p-0 m-0 w-[64px] h-[64px] absolute bottom-[24px] right-[24px] shadow-lg bg-indigo-600 shadow-indigo-500/60 text-white rounded-full cursor-pointer">
+    <img class="w-[26px] h-[26px]" src="assets/images/logout.svg" />
+  </div>
 </div>

@@ -1,13 +1,14 @@
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ToDoList.Commands.Command;
 using ToDoList.Models.Dtos;
 using ToDoList.Repositories;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ToDoLists.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 [Produces("application/json")]
